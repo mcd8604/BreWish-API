@@ -27,21 +27,20 @@ class Event(models.Model):
 	name = models.CharField(max_length=100, blank=False, default='')
 	details = models.TextField()
 	created = models.DateTimeField(auto_now_add=True)
-	createdBy = models.FK()
+	createdBy = models.ForeignKey(User, related_name='events')
 	datetime = models.DateTimeField(auto_now_add=False)
 	location = models.CharField(max_length=100, blank=False, default='')
 	isCorporate = models.BooleanField()
-	isPublic = models.BooleanField()
 	guestCanInvite = models.BooleanField()
-	guestCanAddBeer = models.BooleanField()
+	guestCanAddBeer = models.BooleanField()		
 	
 class EventBeer(models.Model):
-	event = models.FK()
-	beer = models.FK()
-	user = models.FK()
+	event = models.ForeignKey(Event, related_name='event_beers')
+	beer = models.ForeignKey(Beer, related_name='event_beers')
+	user = models.ForeignKey(User, related_name='event_beers'))
 	
 class EventUser(models.Model):
-	event = models.FK()
-	user = models.FK()
+	event = models.ForeignKey(Event, related_name='event_users')
+	user = models.ForeignKey(User, related_name='event_users')
 	isAttending = models.BooleanField()
 	
