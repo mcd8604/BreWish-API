@@ -15,8 +15,17 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from rest_framework import routers
+from brewish_api import views
+
+router = routers.DefaultRouter()
+router.register(r'events', views.EventViewSet)
+router.register(r'beers', views.BeerViewSet)
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^', include('brewish_api.urls')),
+	url(r'^', include(router.urls)),
+	url(r'^admin/', include(admin.site.urls)),
+	url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+#	url(r'^events/$', views.EventList.as_view(), name='event-list'),
+#	url(r'^user/(?P<pk>[0-9]+)/$', views.UserDetail.as_view(), name='user-detail'),        
 ]

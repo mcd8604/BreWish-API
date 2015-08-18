@@ -12,6 +12,13 @@
 bin/
 gen/
 
+# Virtual Env
+local
+include
+
+# Python compiled
+*.pyc
+
 # Gradle files
 .gradle/
 build/
@@ -25,3 +32,14 @@ proguard/
 
 # Log Files
 *.log
+nohup.out
+
+# Database
+db.sqlite3
+
+# Libraries
+lib
+lib64
+
+# Server scripts
+start_gunicorn.sh
