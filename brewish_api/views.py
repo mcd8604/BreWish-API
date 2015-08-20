@@ -31,14 +31,14 @@ class UserBeerDetail(generics.RetrieveUpdateDestroyAPIView):
 class BeerViewSet(viewsets.ModelViewSet):
 	queryset = Beer.objects.all()
 	serializer_class = BeerSerializer    
-	permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+	#permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 	
 class EventViewSet(viewsets.ModelViewSet):
 	queryset = Event.objects.all()
 	serializer_class = EventSerializer    
-	permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+	#permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 	def perform_create(self, serializer):
-		serializer.save(owner=self.request.user)
+		serializer.save(createdBy=self.request.user)
 		
 class EventDetail(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Event.objects.all()

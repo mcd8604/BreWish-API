@@ -29,7 +29,7 @@ class Event(models.Model):
 	createdBy = models.ForeignKey('auth.User', related_name='events')
 	datetime = models.DateTimeField(auto_now_add=False)
 	location = models.CharField(max_length=100, blank=False, default='')
-	isCorporate = models.BooleanField()
+	isCorporate = models.BooleanField(default=False)
 	guestCanInvite = models.BooleanField()
 	guestCanAddBeer = models.BooleanField()		
 

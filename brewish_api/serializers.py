@@ -27,7 +27,7 @@ class UserBeerSerializer(serializers.ModelSerializer):
 		model = UserBeer
 		
 class EventSerializer(serializers.ModelSerializer):
-	#createdBy = serializers.ReadOnlyField(source='owner.username')
+	createdBy = serializers.ReadOnlyField(source='owner.username')
 	class Meta:
 		model = Event
 		
