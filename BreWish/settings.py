@@ -52,6 +52,19 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
+REST_FRAMEWORK = {
+    'DEFAULT_PARSER_CLASSES': (
+		'rest_framework_xml.parsers.XMLParser',
+		'rest_framework.parsers.JSONParser',
+		'rest_framework.parsers.FormParser',
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+		'rest_framework_xml.renderers.XMLRenderer',
+		'rest_framework.renderers.JSONRenderer',
+		'rest_framework.renderers.BrowsableAPIRenderer',
+    ),
+}
+
 ROOT_URLCONF = 'BreWish.urls'
 
 TEMPLATES = [

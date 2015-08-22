@@ -9,13 +9,6 @@ from rest_framework import generics
 from brewish_api import models
 from brewish_api.serializers import *
 
-
-class JSONResponse(HttpResponse):
-	def __init__(self, data, **kwargs):
-		content = JSONRenderer().render(data)
-		kwargs['content_type'] = 'application/json'
-		super(JSONResponse, self).__init__(content, **kwargs)
-
 class UserDetail(generics.RetrieveAPIView):
 	queryset = User.objects.all()
 	serializer_class = UserSerializer
