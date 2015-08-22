@@ -3,9 +3,8 @@ This API is written using the Django REST Framework: http://www.django-rest-fram
 
 If you need to explore the API, simply navigate to the root API url.
 
-Default response format is HTML wrapped JSON. 
-When developing to the API, it is recommended to always include the preferred format.
+Default response format is HTML wrapped JSON. This is to allow easy browsing of the full API.
+When developing to the API, it is recommended to always include the preferred format: <root API URL>?format=<preferred format>
 
-Supported Formats:
-<root API URL>?format=XML
-<root API URL>?format=JSON
+Supported Formats: (API, JSON, XML)
+
