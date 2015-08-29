@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 class Beer(models.Model):
 	name = models.CharField(max_length=100, blank=False, default='')
@@ -19,15 +20,16 @@ class Beer(models.Model):
 class UserBeer(models.Model):
 	user = models.ForeignKey('auth.User', related_name='user_beers')
 	beer = models.ForeignKey(Beer, related_name='user_beers')
-	isOwned = models.BooleanField
-	isWished = models.BooleanField
+	isOwned = models.BooleanField(default=False)
+	isWished = models.BooleanField(default=True)
 
 class Event(models.Model):
 	name = models.CharField(max_length=100, blank=False, default='')
 	details = models.TextField()
 	created = models.DateTimeField(auto_now_add=True)
 	createdBy = models.ForeignKey('auth.User', related_name='events')
-	datetime = models.DateTimeField(auto_now_add=False)
+	date = models.DateField(default=timezone.now)
+	time = models.TimeField(null=True, blank=True)
 	location = models.CharField(max_length=100, blank=False, default='')
 	isCorporate = models.BooleanField(default=False)
 	guestCanInvite = models.BooleanField()
@@ -36,7 +38,7 @@ class Event(models.Model):
 class EventBeer(models.Model):
 	event = models.ForeignKey(Event, related_name='event_beers')
 	beer = models.ForeignKey(Beer, related_name='event_beers')
-	user = models.ForeignKey('auth.User', related_name='event_beers')
+	#user = models.ForeignKey('auth.User', related_name='event_beers')
 
 class EventUser(models.Model):
 	event = models.ForeignKey(Event, related_name='event_users')

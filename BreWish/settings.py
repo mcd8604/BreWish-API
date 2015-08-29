@@ -39,6 +39,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'brewish_api',
     'rest_framework',
+	#'rest_framework.authtoken',
+	'django.contrib.postgres',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -53,15 +55,18 @@ MIDDLEWARE_CLASSES = (
 )
 
 REST_FRAMEWORK = {
+	#'DEFAULT_AUTHENTICATION_CLASSES': (
+	#	'rest_framework.authentication.TokenAuthentication',
+	#),
     'DEFAULT_PARSER_CLASSES': (
-		'rest_framework_xml.parsers.XMLParser',
-		'rest_framework.parsers.JSONParser',
 		'rest_framework.parsers.FormParser',
+		'rest_framework.parsers.JSONParser',
+		'rest_framework_xml.parsers.XMLParser',
     ),
     'DEFAULT_RENDERER_CLASSES': (
-		'rest_framework_xml.renderers.XMLRenderer',
-		'rest_framework.renderers.JSONRenderer',
 		'rest_framework.renderers.BrowsableAPIRenderer',
+		'rest_framework.renderers.JSONRenderer',
+		'rest_framework_xml.renderers.XMLRenderer',
     ),
 }
 
@@ -91,8 +96,14 @@ WSGI_APPLICATION = 'BreWish.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'brewish_db',
+        'USER' : 'brewish_db_user',
+        'PASSWORD' : 'brewish_db_password',
+        'HOST' : 'brewish-db.cwmdy4aj9n6l.us-east-1.rds.amazonaws.com',
+        'PORT' : '5432',
     }
 }
 
@@ -114,4 +125,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
+STATIC_ROOT = 'static'
 STATIC_URL = '/static/'
+
