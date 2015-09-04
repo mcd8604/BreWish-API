@@ -43,3 +43,6 @@ lib64
 
 # Server scripts
 start_gunicorn.sh
+
+# Static web files
+static/

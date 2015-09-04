@@ -22,9 +22,11 @@ from brewish_api import views
 
 router = routers.DefaultRouter()
 router.register(r'events', views.EventViewSet)
+router.register(r'eventbeers', views.EventBeerViewSet)
+router.register(r'eventusers', views.EventUserViewSet)
 router.register(r'beers', views.BeerViewSet)
-router.register(r'wishlist', views.WishViewSet)
-router.register(r'ownedlist', views.OwnedViewSet)
+#router.register(r'wishlist', views.WishViewSet)
+#router.register(r'ownedlist', views.OwnedViewSet)
 
 urlpatterns = [
 	url(r'^', include(router.urls)),

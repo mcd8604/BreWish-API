@@ -17,11 +17,13 @@ class Beer(models.Model):
 	class Meta:
 		ordering = ('name',)
 
-class UserBeer(models.Model):
-	user = models.ForeignKey('auth.User', related_name='user_beers')
-	beer = models.ForeignKey(Beer, related_name='user_beers')
-	isOwned = models.BooleanField(default=False)
-	isWished = models.BooleanField(default=True)
+class OwnedBeer(models.Model):
+	user = models.ForeignKey('auth.User')
+	beer = models.ForeignKey(Beer)
+	
+class WishedBeer(models.Model):
+	user = models.ForeignKey('auth.User')
+	beer = models.ForeignKey(Beer)
 
 class Event(models.Model):
 	name = models.CharField(max_length=100, blank=False, default='')
@@ -33,14 +35,17 @@ class Event(models.Model):
 	location = models.CharField(max_length=100, blank=False, default='')
 	isCorporate = models.BooleanField(default=False)
 	guestCanInvite = models.BooleanField()
-	guestCanAddBeer = models.BooleanField()		
+	guestCanAddBeer = models.BooleanField()
+	#eventUsers = models.ManyToManyField(User, through='EventUser', through_fields=('event', 'user'))
+	#eventBeers = models.ManyToManyField(Beer, through='EventBeer')
 
 class EventBeer(models.Model):
-	event = models.ForeignKey(Event, related_name='event_beers')
-	beer = models.ForeignKey(Beer, related_name='event_beers')
-	#user = models.ForeignKey('auth.User', related_name='event_beers')
+	event = models.ForeignKey(Event, related_name='eventBeers')
+	user = models.ForeignKey('auth.User', related_name='+')
+	beer = models.ForeignKey(Beer)
 
 class EventUser(models.Model):
-	event = models.ForeignKey(Event, related_name='event_users')
-	user = models.ForeignKey('auth.User', related_name='event_users')
-	isAttending = models.BooleanField()
+	event = models.ForeignKey(Event, related_name='eventUsers')
+	user = models.ForeignKey(User, null=False)
+	#inviter = models.ForeignKey(User, related_name="event_invites")
+	isAttending = models.BooleanField(default=False)
